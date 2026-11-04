@@ -6,6 +6,17 @@ export default function Home() {
       <Head>
         <title>Maximize Your Medical Proof For Full Insurance Payout | Car Accident Diagnostics</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/og-image.jpeg" type="image/jpeg" />
+        <link rel="apple-touch-icon" href="/og-image.jpeg" />
+        <meta name="description" content="Maximize your medical proof for full insurance payout. Objective MRI diagnostics, spinal diagnostic charts, and bulletproof reports for car accident injury claims." />
+        <meta property="og:title" content="Maximize Your Medical Proof For Full Insurance Payout" />
+        <meta property="og:description" content="Objective medical diagnostics that force insurance companies to pay big bucks for your car accident claim." />
+        <meta property="og:image" content="/og-image.jpeg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Maximize Your Medical Proof For Full Insurance Payout" />
+        <meta name="twitter:description" content="Objective medical diagnostics that force insurance companies to pay big bucks for your car accident claim." />
+        <meta name="twitter:image" content="/og-image.jpeg" />
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,800;0,900;1,400;1,800&family=Teko:wght@600;700&display=swap" rel="stylesheet" />
