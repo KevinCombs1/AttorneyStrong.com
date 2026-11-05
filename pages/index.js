@@ -18,6 +18,7 @@ export default function Home() {
         <meta name="twitter:description" content="Objective medical diagnostics that force insurance companies to pay big bucks for your car accident claim." />
         <meta name="twitter:image" content="/og-image.jpeg" />
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.trkbid.com/at.js" data-key="dss1052"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,800;0,900;1,400;1,800&family=Teko:wght@600;700&display=swap" rel="stylesheet" />
       </Head>
@@ -544,6 +545,21 @@ const pageHtml = `
     <script>
         document.getElementById('year').innerText = new Date().getFullYear();
 
+        // === DSP Tracker Init ===
+        window.addEventListener('DOMContentLoaded', function() {
+            if (window.dss1052ActionTracker) {
+                dss1052ActionTracker.init();
+                // Fire page-load / landing event (eventId: 0)
+                dss1052ActionTracker.trackVisit();
+            }
+        });
+
+        function trackConversion() {
+            if (window.dss1052ActionTracker) {
+                try { dss1052ActionTracker.trackRegistration(); } catch(e) { console.error('Tracker error:', e); }
+            }
+        }
+
         let formData = {
             injuryStatus: '',
             name: '',
@@ -579,6 +595,8 @@ const pageHtml = `
             } catch (err) {
                 console.error('Submission error:', err);
             }
+
+            trackConversion();
 
             const step2 = document.getElementById('step2');
             step2.innerHTML = \`
@@ -616,6 +634,8 @@ const pageHtml = `
                 console.error('Submission error:', err);
             }
 
+            trackConversion();
+
             document.getElementById('bottomLeadForm').classList.add('hidden');
             document.getElementById('bottomSuccess').classList.remove('hidden');
         }
@@ -626,6 +646,9 @@ const pageHtml = `
 
         function handleCallClick(event) {
             console.log("Call clicked");
+            if (window.dss1052ActionTracker) {
+                try { dss1052ActionTracker.track({ eventId: 2, once: true }); } catch(e) { console.error('Tracker error:', e); }
+            }
         }
 
         async function handlePopupSubmit(e) {
@@ -650,6 +673,8 @@ const pageHtml = `
             } catch (err) {
                 console.error('Submission error:', err);
             }
+
+            trackConversion();
 
             document.getElementById('popupForm').classList.add('hidden');
             document.getElementById('popupSuccess').classList.remove('hidden');
