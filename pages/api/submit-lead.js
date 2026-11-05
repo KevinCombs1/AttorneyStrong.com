@@ -9,6 +9,7 @@ export default async function handler(req, res) {
     const lead = addLead({
       name: req.body.name || '',
       phone: req.body.phone || '',
+      email: req.body.email || '',
       injuryStatus: req.body.injuryStatus || '',
       notes: req.body.notes || '',
       source: req.body.source || 'Hero Form',

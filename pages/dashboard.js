@@ -54,12 +54,13 @@ export default function Dashboard() {
   }
 
   function downloadCsv() {
-    const headers = ['Submitted (PST)', 'Source', 'Name', 'Phone', 'Injury Status', 'Notes'];
+    const headers = ['Submitted (PST)', 'Source', 'Name', 'Phone', 'Email', 'Injury Status', 'Notes'];
     const rows = leads.map((l) => [
       new Date(l.submittedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }),
       l.source || 'Hero Form',
       l.name || '',
       l.phone || '',
+      l.email || '',
       l.injuryStatus || '',
       (l.notes || '').replace(/"/g, '""'),
     ]);
@@ -163,6 +164,7 @@ export default function Dashboard() {
                     <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #06B6D4', color: '#00F2FE' }}>Source</th>
                     <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #06B6D4', color: '#00F2FE' }}>Name</th>
                     <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #06B6D4', color: '#00F2FE' }}>Phone</th>
+                    <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #06B6D4', color: '#00F2FE' }}>Email</th>
                     <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #06B6D4', color: '#00F2FE' }}>Injury Status</th>
                     <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #06B6D4', color: '#00F2FE' }}>Notes</th>
                   </tr>
@@ -170,7 +172,7 @@ export default function Dashboard() {
                 <tbody>
                   {leads.length === 0 ? (
                     <tr>
-                      <td colSpan="6" style={{ padding: '40px', textAlign: 'center', color: '#94A3B8' }}>No leads yet.</td>
+                      <td colSpan="7" style={{ padding: '40px', textAlign: 'center', color: '#94A3B8' }}>No leads yet.</td>
                     </tr>
                   ) : (
                     leads.slice().reverse().map((lead) => (
@@ -179,6 +181,7 @@ export default function Dashboard() {
                         <td style={{ padding: '12px', color: '#CBD5E1' }}>{lead.source || 'Hero Form'}</td>
                         <td style={{ padding: '12px', color: '#fff', fontWeight: 'bold' }}>{lead.name || '—'}</td>
                         <td style={{ padding: '12px', color: '#CBD5E1' }}>{lead.phone || '—'}</td>
+                        <td style={{ padding: '12px', color: '#CBD5E1' }}>{lead.email || '—'}</td>
                         <td style={{ padding: '12px', color: '#CBD5E1' }}>{lead.injuryStatus || '—'}</td>
                         <td style={{ padding: '12px', color: '#94A3B8' }}>{lead.notes || '—'}</td>
                       </tr>

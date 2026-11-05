@@ -160,6 +160,46 @@ const pageHtml = `
 </head>
 <body class="bg-clinicalWhite text-frostNavy font-sans antialiased selection:bg-frostCyan selection:text-white pb-24 md:pb-0">
 
+    <!-- POPUP OVERLAY (shows immediately on page load) -->
+    <div id="popupOverlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
+        <div class="bg-frostNavy border-2 border-frostCyan rounded-2xl shadow-2xl max-w-md w-full p-6 md:p-8 relative text-white">
+            <button onclick="closePopup()" class="absolute top-3 right-3 text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
+            <div class="text-center mb-5">
+                <i class="fa-solid fa-file-waveform text-5xl text-frostCyan"></i>
+                <h3 class="text-2xl font-black uppercase mt-3 tracking-tight">Get Your Big Medical Settlement</h3>
+                <p class="text-xs text-frostIce mt-1">Fill this out now to get maximum medical proof for your claim.</p>
+            </div>
+            <form id="popupForm" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Name</label>
+                    <input type="text" id="popupName" placeholder="John Doe" required class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Cellphone</label>
+                    <input type="tel" id="popupPhone" placeholder="(555) 000-0000" required class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Email</label>
+                    <input type="email" id="popupEmail" placeholder="you@example.com" required class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                </div>
+                <label class="flex items-center gap-2 text-xs font-bold text-slate-200 cursor-pointer pt-1">
+                    <input type="checkbox" id="popupCheckbox" required class="w-4 h-4 accent-frostCyan cursor-pointer">
+                    <span class="uppercase tracking-wide">I want a big medical settlement</span>
+                </label>
+                <button type="submit" class="w-full medical-btn py-3.5 rounded-lg text-lg uppercase tracking-wider shadow-xl flex justify-center items-center gap-2 animate-frost-pulse">
+                    <i class="fa-solid fa-bolt text-xl"></i>
+                    <span>Submit & Get Paid</span>
+                </button>
+            </form>
+            <div id="popupSuccess" class="hidden text-center py-8 space-y-3">
+                <i class="fa-solid fa-circle-check text-5xl text-frostIce"></i>
+                <h4 class="text-xl font-black text-white uppercase">Request Received!</h4>
+                <p class="text-xs text-slate-300">Our medical team will contact you shortly to start your evaluation.</p>
+                <button onclick="closePopup()" class="medical-btn px-6 py-2 rounded-lg text-base uppercase mt-2">Close</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Top Laser Alert Bar -->
     <div class="bg-frostNavy text-white font-black text-center py-2 px-3 text-xs md:text-sm uppercase tracking-wider shadow-md flex justify-center items-center gap-2 border-b border-frostCyan/50">
         <i class="fa-solid fa-bolt text-frostIce animate-pulse"></i>
@@ -587,6 +627,40 @@ const pageHtml = `
         function handleCallClick(event) {
             console.log("Call clicked");
         }
+
+        async function handlePopupSubmit(e) {
+            e.preventDefault();
+            var name = document.getElementById('popupName').value;
+            var phone = document.getElementById('popupPhone').value;
+            var email = document.getElementById('popupEmail').value;
+
+            // Submit to API
+            try {
+                await fetch('/api/submit-lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: name,
+                        phone: phone,
+                        email: email,
+                        injuryStatus: 'I want a big medical settlement',
+                        source: 'Popup Form'
+                    }),
+                });
+            } catch (err) {
+                console.error('Submission error:', err);
+            }
+
+            document.getElementById('popupForm').classList.add('hidden');
+            document.getElementById('popupSuccess').classList.remove('hidden');
+        }
+
+        function closePopup() {
+            document.getElementById('popupOverlay').style.display = 'none';
+        }
+
+        // Wire up the popup form
+        document.getElementById('popupForm').addEventListener('submit', handlePopupSubmit);
     </script>
 </body>
 </html>
