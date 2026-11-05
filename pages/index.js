@@ -224,10 +224,10 @@ const pageHtml = `
                     <i class="fa-solid fa-user-doctor text-xl"></i>
                     <span>Doctor Login</span>
                 </a>
-                <a href="tel:18005550199" onclick="handleCallClick(event)" class="medical-btn px-4 py-2 rounded-lg text-base flex items-center gap-2 uppercase tracking-wide hidden sm:flex">
+                <a href="tel:13104889814" onclick="handleCallClick(event)" class="medical-btn px-4 py-2 rounded-lg text-base flex items-center gap-2 uppercase tracking-wide hidden sm:flex">
                     <i class="fa-solid fa-phone-volume text-xl animate-pulse"></i>
                     <span class="hidden sm:inline">CALL OUR MEDICAL TEAM:</span>
-                    <span>(800) 555-0199</span>
+                    <span>(310) 488-9814</span>
                 </a>
             </div>
         </div>
@@ -357,7 +357,7 @@ const pageHtml = `
 
                     <div class="mt-4 pt-3 border-t border-slate-700 text-center">
                         <p class="text-xs text-slate-300 mb-1">Need fast answers?</p>
-                        <a href="tel:18005550199" onclick="handleCallClick(event)" class="text-frostIce hover:text-white font-extrabold text-sm flex items-center justify-center gap-1 group">
+                        <a href="tel:13104889814" onclick="handleCallClick(event)" class="text-frostIce hover:text-white font-extrabold text-sm flex items-center justify-center gap-1 group">
                             <i class="fa-solid fa-phone group-hover:animate-bounce"></i> (Call Our Medical Desk Now)
                         </a>
                     </div>
@@ -512,9 +512,9 @@ const pageHtml = `
 
                 <div class="mt-4 pt-4 border-t border-slate-700 text-center flex flex-col sm:flex-row justify-center items-center gap-3">
                     <span class="text-xs text-slate-300">Need Immediate Assistance?</span>
-                    <a href="tel:18005550199" onclick="handleCallClick(event)" class="medical-btn px-4 py-2 rounded-lg text-base uppercase tracking-wider flex items-center gap-2">
+                    <a href="tel:13104889814" onclick="handleCallClick(event)" class="medical-btn px-4 py-2 rounded-lg text-base uppercase tracking-wider flex items-center gap-2">
                         <i class="fa-solid fa-phone text-lg"></i>
-                        <span>CALL OUR DOCTORS: (800) 555-0199</span>
+                        <span>CALL OUR DOCTORS: (310) 488-9814</span>
                     </a>
                 </div>
             </div>
@@ -534,7 +534,7 @@ const pageHtml = `
 
     <!-- MOBILE STICKY BOTTOM BAR -->
     <div class="fixed bottom-0 left-0 right-0 bg-frostNavy border-t border-frostCyan p-3 flex gap-2 md:hidden z-50 backdrop-blur">
-        <a href="tel:18005550199" onclick="handleCallClick(event)" class="w-1/2 bg-slate-800 border border-frostCyan/60 text-frostIce font-extrabold py-3 rounded-lg text-xs text-center flex items-center justify-center gap-1 active:scale-95 transition">
+        <a href="tel:13104889814" onclick="handleCallClick(event)" class="w-1/2 bg-slate-800 border border-frostCyan/60 text-frostIce font-extrabold py-3 rounded-lg text-xs text-center flex items-center justify-center gap-1 active:scale-95 transition">
             <i class="fa-solid fa-phone"></i> CALL MEDICAL TEAM
         </a>
         <button onclick="scrollToForm()" class="w-1/2 medical-btn py-3 rounded-lg text-base text-center uppercase tracking-wider animate-frost-pulse">
@@ -604,7 +604,7 @@ const pageHtml = `
                     <i class="fa-solid fa-circle-check text-5xl text-frostIce"></i>
                     <h4 class="text-2xl font-black text-white">EVALUATION REQUESTED!</h4>
                     <p class="text-xs text-slate-300">Our medical team has received your information. A physician assistant will call <strong>\${formData.phone}</strong> within 5-10 minutes.</p>
-                    <a href="tel:18005550199" onclick="handleCallClick(event)" class="inline-block medical-btn px-6 py-2.5 rounded-lg text-base uppercase mt-2 animate-frost-pulse">
+                    <a href="tel:13104889814" onclick="handleCallClick(event)" class="inline-block medical-btn px-6 py-2.5 rounded-lg text-base uppercase mt-2 animate-frost-pulse">
                         Call Right Now for Immediate Priority
                     </a>
                 </div>
