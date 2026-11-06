@@ -796,10 +796,11 @@ const pageHtml = `
             // At 4 seconds: show the popup (white card, no form visible yet)
             setTimeout(function() {
                 overlay.style.display = 'flex';
-                // Trigger fade-in of the overlay (backdrop + white card)
-                requestAnimationFrame(function() {
+                // Trigger fade-in of the overlay (backdrop + white card) after a tick
+                // so the browser registers the display change before transitioning opacity
+                setTimeout(function() {
                     overlay.style.opacity = '1';
-                });
+                }, 50);
             }, 4000);
 
             // At 5 seconds: begin the 2-second unfade
