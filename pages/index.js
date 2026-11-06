@@ -221,7 +221,7 @@ const pageHtml = `
 <body class="bg-clinicalWhite text-frostNavy font-sans antialiased selection:bg-frostCyan selection:text-white pb-24 md:pb-0">
 
     <!-- POPUP OVERLAY (hidden, fades in white at 4s, unfades to form at 5s) -->
-    <div id="popupOverlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4" style="display:none; opacity:0; transition:opacity 1s ease-in;">
+    <div id="popupOverlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4" style="opacity:0; pointer-events:none; transition:opacity 1s ease-in;">
         <div id="popupCard" class="border-2 border-frostCyan rounded-2xl shadow-2xl max-w-md w-full p-6 md:p-8 relative text-white" style="background:#FFFFFF; transition:background-color 2s ease-in-out;">
             <div id="popupContent" style="opacity:0; transition:opacity 2s ease-in-out;">
             <button onclick="closePopup()" class="absolute top-3 right-3 text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
@@ -780,30 +780,28 @@ const pageHtml = `
         }
 
         function closePopup() {
-            document.getElementById('popupOverlay').style.display = 'none';
+            var o = document.getElementById('popupOverlay');
+            o.style.opacity = '0';
+            o.style.pointerEvents = 'none';
         }
 
         // === Popup fade-in sequence ===
-        // 0-4s: hidden
-        // 4s: overlay + white card fade in (1s)
-        // 5s: card background unfades from white to navy + form content fades in (2s)
-        // 7s: fully visible
+        // 0-4s: invisible (opacity:0, pointer-events:none)
+        // 4s: overlay fades in over 1s (white card visible, no form content)
+        // 5s: card bg unfades white->navy over 2s, form content fades in over 2s
+        // 7s: fully visible and interactive
         (function() {
             var overlay = document.getElementById('popupOverlay');
             var card = document.getElementById('popupCard');
             var content = document.getElementById('popupContent');
 
-            // At 4 seconds: show the popup (white card, no form visible yet)
+            // At 4s: fade in the overlay (backdrop + white card)
             setTimeout(function() {
-                overlay.style.display = 'flex';
-                // Trigger fade-in of the overlay (backdrop + white card) after a tick
-                // so the browser registers the display change before transitioning opacity
-                setTimeout(function() {
-                    overlay.style.opacity = '1';
-                }, 50);
+                overlay.style.pointerEvents = 'auto';
+                overlay.style.opacity = '1';
             }, 4000);
 
-            // At 5 seconds: begin the 2-second unfade
+            // At 5s: begin the 2s unfade
             // Card background transitions from white to navy, form content fades in
             setTimeout(function() {
                 card.style.background = '#0F172A'; // frostNavy
