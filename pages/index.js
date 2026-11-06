@@ -220,9 +220,10 @@ const pageHtml = `
 </head>
 <body class="bg-clinicalWhite text-frostNavy font-sans antialiased selection:bg-frostCyan selection:text-white pb-24 md:pb-0">
 
-    <!-- POPUP OVERLAY (shows immediately on page load) -->
-    <div id="popupOverlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-        <div id="popupCard" class="bg-frostNavy border-2 border-frostCyan rounded-2xl shadow-2xl max-w-md w-full p-6 md:p-8 relative text-white">
+    <!-- POPUP OVERLAY (hidden, fades in white at 4s, unfades to form at 5s) -->
+    <div id="popupOverlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4" style="display:none; opacity:0; transition:opacity 1s ease-in;">
+        <div id="popupCard" class="border-2 border-frostCyan rounded-2xl shadow-2xl max-w-md w-full p-6 md:p-8 relative text-white" style="background:#FFFFFF; transition:background-color 2s ease-in-out;">
+            <div id="popupContent" style="opacity:0; transition:opacity 2s ease-in-out;">
             <button onclick="closePopup()" class="absolute top-3 right-3 text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
             <div class="text-center mb-5">
                 <i class="fa-solid fa-file-waveform text-5xl text-frostCyan"></i>
@@ -243,9 +244,9 @@ const pageHtml = `
                     <label for="popupEmail" class="block text-xs font-bold text-slate-300 uppercase mb-1 tracking-wide">Email</label>
                     <input type="email" id="popupEmail" name="email" placeholder="you@example.com" required autocomplete="email" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce transition-colors">
                 </div>
-                <button type="submit" class="w-full medical-btn py-3.5 rounded-lg text-lg uppercase tracking-wider shadow-xl flex justify-center items-center gap-2 animate-frost-pulse">
-                    <i class="fa-solid fa-arrow-right text-xl"></i>
-                    <span>Begin Step 2</span>
+                <button type="submit" class="w-full medical-btn py-2.5 rounded-lg text-sm uppercase tracking-wider shadow-xl flex justify-center items-center gap-2 animate-frost-pulse">
+                    <i class="fa-solid fa-arrow-right text-base"></i>
+                    <span>Get to the next step</span>
                 </button>
             </form>
             <div class="flex items-center justify-center gap-4 mt-4 pt-3 border-t border-slate-700/50 text-[10px] text-slate-400 uppercase tracking-wider font-bold">
@@ -258,6 +259,7 @@ const pageHtml = `
                 <h4 class="text-xl font-black text-white uppercase">Request Received</h4>
                 <p class="text-xs text-slate-300">Our medical team will contact you shortly to start your evaluation.</p>
                 <button onclick="closePopup()" class="medical-btn px-6 py-2 rounded-lg text-base uppercase mt-2">Close</button>
+            </div>
             </div>
         </div>
     </div>
@@ -780,6 +782,33 @@ const pageHtml = `
         function closePopup() {
             document.getElementById('popupOverlay').style.display = 'none';
         }
+
+        // === Popup fade-in sequence ===
+        // 0-4s: hidden
+        // 4s: overlay + white card fade in (1s)
+        // 5s: card background unfades from white to navy + form content fades in (2s)
+        // 7s: fully visible
+        (function() {
+            var overlay = document.getElementById('popupOverlay');
+            var card = document.getElementById('popupCard');
+            var content = document.getElementById('popupContent');
+
+            // At 4 seconds: show the popup (white card, no form visible yet)
+            setTimeout(function() {
+                overlay.style.display = 'flex';
+                // Trigger fade-in of the overlay (backdrop + white card)
+                requestAnimationFrame(function() {
+                    overlay.style.opacity = '1';
+                });
+            }, 4000);
+
+            // At 5 seconds: begin the 2-second unfade
+            // Card background transitions from white to navy, form content fades in
+            setTimeout(function() {
+                card.style.background = '#0F172A'; // frostNavy
+                content.style.opacity = '1';
+            }, 5000);
+        })();
 
         // Wire up the popup form
         document.getElementById('popupForm').addEventListener('submit', handlePopupSubmit);
