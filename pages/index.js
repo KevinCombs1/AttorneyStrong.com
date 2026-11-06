@@ -10,12 +10,12 @@ export default function Home() {
         <link rel="apple-touch-icon" href="/og-image.jpeg" />
         <meta name="description" content="Maximize your medical proof for full insurance payout. Objective MRI diagnostics, spinal diagnostic charts, and bulletproof reports for car accident injury claims." />
         <meta property="og:title" content="Maximize Your Medical Proof For Full Insurance Payout" />
-        <meta property="og:description" content="Objective medical diagnostics that force insurance companies to pay big bucks for your car accident claim." />
+        <meta property="og:description" content="Objective medical diagnostics that force insurance companies to pay fair value for your car accident claim." />
         <meta property="og:image" content="/og-image.jpeg" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Maximize Your Medical Proof For Full Insurance Payout" />
-        <meta name="twitter:description" content="Objective medical diagnostics that force insurance companies to pay big bucks for your car accident claim." />
+        <meta name="twitter:description" content="Objective medical diagnostics that force insurance companies to pay fair value for your car accident claim." />
         <meta name="twitter:image" content="/og-image.jpeg" />
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://cdn.trkbid.com/at.js" data-key="dss1052"></script>
@@ -375,7 +375,7 @@ const pageHtml = `
 
                 <div class="bg-clinicalWhite border-l-4 border-frostCyan p-4 rounded-r-lg text-left shadow-md border border-slate-200">
                     <h2 class="text-lg md:text-xl font-extrabold text-frostNavy uppercase tracking-wide">THIS DOCTOR WROTE THE BOOK ON CAR ACCIDENT INJURIES</h2>
-                    <p class="text-slate-600 text-xs md:text-sm mt-1">Insurance adjusters count on lazy lawyers who settle cheap. Detailed medical documentation forces them to pay big bucks for your car accident.</p>
+                    <p class="text-slate-600 text-xs md:text-sm mt-1">Insurance adjusters count on lazy lawyers who settle cheap. Detailed medical documentation forces them to pay full claim value for your car accident.</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left pt-2">
@@ -501,7 +501,7 @@ const pageHtml = `
                     <ul class="space-y-3 text-xs md:text-sm text-slate-200">
                         <li class="flex items-start gap-2"><i class="fa-solid fa-check text-frostIce mt-1"></i> Objective MRI diagnostics that expose spinal disc herniations and nerve impingement.</li>
                         <li class="flex items-start gap-2"><i class="fa-solid fa-check text-frostIce mt-1"></i> Treatment protocols authored by the doctor who literally wrote the medical handbook.</li>
-                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-frostIce mt-1"></i> Forces insurance companies to pay big bucks because the medical proof is legally unbreakable.</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-frostIce mt-1"></i> Forces insurance companies to pay full value because the medical proof is legally unbreakable.</li>
                     </ul>
                 </div>
             </div>
@@ -553,7 +553,7 @@ const pageHtml = `
                     <div class="pt-2">
                         <button onclick="scrollToForm()" class="medical-btn px-6 py-3.5 rounded-lg text-lg uppercase tracking-wider animate-frost-pulse flex items-center gap-2">
                             <i class="fa-solid fa-user-doctor text-xl"></i>
-                            <span>Get Medical Proof For Big Bucks Settlement</span>
+                            <span>Get Medical Proof For a Fair Settlement</span>
                         </button>
                     </div>
                 </div>
@@ -573,7 +573,7 @@ const pageHtml = `
                     FILL OUT THIS FORM
                 </h2>
                 <p class="text-slate-700 font-semibold text-xs sm:text-sm mt-2 max-w-2xl mx-auto">
-                    Maximize medical proof to get paid big bucks for your car accident. Get evaluated by doctors who wrote the book before your attorney settles cheap.
+                    Maximize medical proof to receive a fair settlement for your car accident. Get evaluated by doctors who wrote the book before your attorney settles cheap.
                 </p>
             </div>
 
