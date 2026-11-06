@@ -170,23 +170,19 @@ const pageHtml = `
                 <h3 class="text-2xl font-black uppercase mt-3 tracking-tight">Get Your Big Medical Settlement</h3>
                 <p class="text-xs text-frostIce mt-1">Fill this out now to get maximum medical proof for your claim.</p>
             </div>
-            <form id="popupForm" class="space-y-3">
+            <form id="popupForm" class="space-y-3" autocomplete="on">
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Name</label>
-                    <input type="text" id="popupName" placeholder="John Doe" required class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                    <label for="popupName" class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Name</label>
+                    <input type="text" id="popupName" name="name" placeholder="John Doe" required autocomplete="name" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Cellphone</label>
-                    <input type="tel" id="popupPhone" placeholder="(555) 000-0000" required class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                    <label for="popupPhone" class="block text-xs font-bold text-slate-300 uppercase mb-1">Cellphone</label>
+                    <input type="tel" id="popupPhone" name="tel" placeholder="(555) 000-0000" required autocomplete="tel" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Email</label>
-                    <input type="email" id="popupEmail" placeholder="you@example.com" required class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                    <label for="popupEmail" class="block text-xs font-bold text-slate-300 uppercase mb-1">Email</label>
+                    <input type="email" id="popupEmail" name="email" placeholder="you@example.com" required autocomplete="email" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
                 </div>
-                <label class="flex items-center gap-2 text-xs font-bold text-slate-200 cursor-pointer pt-1">
-                    <input type="checkbox" id="popupCheckbox" required class="w-4 h-4 accent-frostCyan cursor-pointer">
-                    <span class="uppercase tracking-wide">I want a big medical settlement</span>
-                </label>
                 <button type="submit" class="w-full medical-btn py-3.5 rounded-lg text-lg uppercase tracking-wider shadow-xl flex justify-center items-center gap-2 animate-frost-pulse">
                     <i class="fa-solid fa-bolt text-xl"></i>
                     <span>Submit & Get Paid</span>
@@ -314,7 +310,7 @@ const pageHtml = `
                         <p class="text-xs text-frostIce mt-1">Get objective medical proof to force maximum payout.</p>
                     </div>
 
-                    <form id="leadForm" class="space-y-4">
+                    <form id="leadForm" class="space-y-4" autocomplete="on">
                         
                         <div class="flex items-center justify-between text-xs font-bold text-frostIce mb-2 border-b border-slate-700 pb-2">
                             <span id="stepLabel">STEP 1 OF 2: INJURY STATUS</span>
@@ -344,8 +340,8 @@ const pageHtml = `
 
                         <div id="step2" class="space-y-3 hidden">
                             <label class="block text-xs font-bold text-slate-300 uppercase">Where should our medical team contact you?</label>
-                            <input type="text" id="fullName" placeholder="Your Full Name" required class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
-                            <input type="tel" id="phoneNumber" placeholder="Phone Number (For Fast Callback)" required class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                            <input type="text" id="fullName" name="name" placeholder="Your Full Name" required autocomplete="name" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                            <input type="tel" id="phoneNumber" name="tel" placeholder="Phone Number (For Fast Callback)" required autocomplete="tel" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
                             
                             <button type="submit" class="w-full medical-btn py-3.5 rounded-lg text-lg uppercase tracking-wider shadow-xl flex justify-center items-center gap-2 mt-2 animate-frost-pulse">
                                 <span>GET PAID NOW</span>
@@ -481,21 +477,21 @@ const pageHtml = `
             </div>
 
             <div class="bg-frostNavy text-white border-2 border-frostCyan rounded-2xl p-6 md:p-8 shadow-2xl relative max-w-2xl mx-auto">
-                <form id="bottomLeadForm" class="space-y-4">
+                <form id="bottomLeadForm" class="space-y-4" autocomplete="on">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Your Full Name:</label>
-                            <input type="text" id="bFullName" placeholder="John Doe" required class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                            <label for="bFullName" class="block text-xs font-bold text-slate-300 uppercase mb-1">Your Full Name:</label>
+                            <input type="text" id="bFullName" name="name" placeholder="John Doe" required autocomplete="name" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Best Phone Number:</label>
-                            <input type="tel" id="bPhoneNumber" placeholder="(555) 000-0000" required class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                            <label for="bPhoneNumber" class="block text-xs font-bold text-slate-300 uppercase mb-1">Best Phone Number:</label>
+                            <input type="tel" id="bPhoneNumber" name="tel" placeholder="(555) 000-0000" required autocomplete="tel" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Describe Pain / Needed Diagnostic Scans:</label>
-                        <textarea id="bNotes" rows="3" placeholder="Spinal pain, neck stiffness, doctor didn't order MRI, etc..." class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce"></textarea>
+                        <label for="bNotes" class="block text-xs font-bold text-slate-300 uppercase mb-1">Describe Pain / Needed Diagnostic Scans:</label>
+                        <textarea id="bNotes" name="notes" rows="3" placeholder="Spinal pain, neck stiffness, doctor didn't order MRI, etc..." class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce"></textarea>
                     </div>
 
                     <button type="submit" class="w-full medical-btn py-4 rounded-lg text-lg uppercase tracking-wider shadow-2xl flex justify-center items-center gap-2 animate-frost-pulse">
