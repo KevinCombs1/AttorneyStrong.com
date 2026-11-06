@@ -245,7 +245,7 @@ const pageHtml = `
                 </div>
                 <button type="submit" class="w-full medical-btn py-3.5 rounded-lg text-lg uppercase tracking-wider shadow-xl flex justify-center items-center gap-2 animate-frost-pulse">
                     <i class="fa-solid fa-arrow-right text-xl"></i>
-                    <span>Request My Evaluation</span>
+                    <span>Begin Step 2</span>
                 </button>
             </form>
             <div class="flex items-center justify-center gap-4 mt-4 pt-3 border-t border-slate-700/50 text-[10px] text-slate-400 uppercase tracking-wider font-bold">
