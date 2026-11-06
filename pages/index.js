@@ -163,37 +163,80 @@ const pageHtml = `
 
     <!-- POPUP OVERLAY (shows immediately on page load) -->
     <div id="popupOverlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-        <div class="bg-frostNavy border-2 border-frostCyan rounded-2xl shadow-2xl max-w-md w-full p-6 md:p-8 relative text-white">
-            <button onclick="closePopup()" class="absolute top-3 right-3 text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
-            <div class="text-center mb-5">
-                <i class="fa-solid fa-file-waveform text-5xl text-frostCyan"></i>
-                <h3 class="text-2xl font-black uppercase mt-3 tracking-tight">Get Your Big Medical Settlement</h3>
-                <p class="text-xs text-frostIce mt-1">Fill this out now to get maximum medical proof for your claim.</p>
+        <div id="popupCard" class="bg-frostNavy border-2 border-frostCyan rounded-2xl shadow-2xl max-w-md w-full p-6 md:p-8 relative text-white transition-opacity duration-700">
+
+            <!-- PART 1: Medical Proof Summary -->
+            <div id="popupPart1">
+                <button onclick="closePopup()" class="absolute top-3 right-3 text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
+                <div class="text-center mb-5">
+                    <i class="fa-solid fa-file-shield text-5xl text-frostCyan"></i>
+                    <h3 class="text-2xl font-black uppercase mt-3 tracking-tight">The Medical Proof You Need</h3>
+                    <p class="text-xs text-frostIce mt-1 font-bold uppercase tracking-wide">For a Fair Insurance Settlement</p>
+                </div>
+                <div class="space-y-4 text-sm leading-relaxed text-slate-200">
+                    <p class="font-semibold">
+                        Insurance companies do not pay for pain they cannot see. Without objective diagnostic evidence, your claim is treated as minor and settled for pennies. To receive a fair payout, your file must contain:
+                    </p>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-frostCyan text-base mt-0.5 shrink-0"></i>
+                            <span><strong class="text-white">Objective MRI imaging</strong> documenting spinal disc injury, nerve compression, or soft-tissue damage directly linked to the collision.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-frostCyan text-base mt-0.5 shrink-0"></i>
+                            <span><strong class="text-white">Detailed diagnostic reports</strong> from a qualified medical specialist — not generic ER discharge notes that say "you're fine."</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-frostCyan text-base mt-0.5 shrink-0"></i>
+                            <span><strong class="text-white">A documented treatment protocol</strong> showing ongoing medical necessity, forcing the adjuster to justify any lowball offer in writing.</span>
+                        </li>
+                    </ul>
+                    <p class="font-semibold border-l-2 border-frostCyan pl-3 italic">
+                        Without this proof, your attorney has no leverage. With it, the insurance company must pay — or face it in court.
+                    </p>
+                </div>
+                <div class="flex justify-end mt-6">
+                    <button onclick="advanceToPart2()" class="medical-btn px-6 py-3 rounded-lg text-base uppercase tracking-wider flex items-center gap-2 animate-frost-pulse">
+                        <span>Continue</span>
+                        <i class="fa-solid fa-arrow-right text-lg"></i>
+                    </button>
+                </div>
             </div>
-            <form id="popupForm" class="space-y-3" autocomplete="on">
-                <div>
-                    <label for="popupName" class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Name</label>
-                    <input type="text" id="popupName" name="name" placeholder="John Doe" required autocomplete="name" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+
+            <!-- PART 2: The Form (hidden initially) -->
+            <div id="popupPart2" class="hidden">
+                <button onclick="closePopup()" class="absolute top-3 right-3 text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
+                <div class="text-center mb-5">
+                    <i class="fa-solid fa-file-waveform text-5xl text-frostCyan"></i>
+                    <h3 class="text-2xl font-black uppercase mt-3 tracking-tight">Get Your Big Medical Settlement</h3>
+                    <p class="text-xs text-frostIce mt-1">Fill this out now to get maximum medical proof for your claim.</p>
                 </div>
-                <div>
-                    <label for="popupPhone" class="block text-xs font-bold text-slate-300 uppercase mb-1">Cellphone</label>
-                    <input type="tel" id="popupPhone" name="tel" placeholder="(555) 000-0000" required autocomplete="tel" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                <form id="popupForm" class="space-y-3" autocomplete="on">
+                    <div>
+                        <label for="popupName" class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Name</label>
+                        <input type="text" id="popupName" name="name" placeholder="John Doe" required autocomplete="name" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                    </div>
+                    <div>
+                        <label for="popupPhone" class="block text-xs font-bold text-slate-300 uppercase mb-1">Cellphone</label>
+                        <input type="tel" id="popupPhone" name="tel" placeholder="(555) 000-0000" required autocomplete="tel" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                    </div>
+                    <div>
+                        <label for="popupEmail" class="block text-xs font-bold text-slate-300 uppercase mb-1">Email</label>
+                        <input type="email" id="popupEmail" name="email" placeholder="you@example.com" required autocomplete="email" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
+                    </div>
+                    <button type="submit" class="w-full medical-btn py-3.5 rounded-lg text-lg uppercase tracking-wider shadow-xl flex justify-center items-center gap-2 animate-frost-pulse">
+                        <i class="fa-solid fa-bolt text-xl"></i>
+                        <span>Submit & Get Paid</span>
+                    </button>
+                </form>
+                <div id="popupSuccess" class="hidden text-center py-8 space-y-3">
+                    <i class="fa-solid fa-circle-check text-5xl text-frostIce"></i>
+                    <h4 class="text-xl font-black text-white uppercase">Request Received!</h4>
+                    <p class="text-xs text-slate-300">Our medical team will contact you shortly to start your evaluation.</p>
+                    <button onclick="closePopup()" class="medical-btn px-6 py-2 rounded-lg text-base uppercase mt-2">Close</button>
                 </div>
-                <div>
-                    <label for="popupEmail" class="block text-xs font-bold text-slate-300 uppercase mb-1">Email</label>
-                    <input type="email" id="popupEmail" name="email" placeholder="you@example.com" required autocomplete="email" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
-                </div>
-                <button type="submit" class="w-full medical-btn py-3.5 rounded-lg text-lg uppercase tracking-wider shadow-xl flex justify-center items-center gap-2 animate-frost-pulse">
-                    <i class="fa-solid fa-bolt text-xl"></i>
-                    <span>Submit & Get Paid</span>
-                </button>
-            </form>
-            <div id="popupSuccess" class="hidden text-center py-8 space-y-3">
-                <i class="fa-solid fa-circle-check text-5xl text-frostIce"></i>
-                <h4 class="text-xl font-black text-white uppercase">Request Received!</h4>
-                <p class="text-xs text-slate-300">Our medical team will contact you shortly to start your evaluation.</p>
-                <button onclick="closePopup()" class="medical-btn px-6 py-2 rounded-lg text-base uppercase mt-2">Close</button>
             </div>
+
         </div>
     </div>
 
@@ -679,6 +722,38 @@ const pageHtml = `
         function closePopup() {
             document.getElementById('popupOverlay').style.display = 'none';
         }
+
+        var popupAdvanced = false;
+
+        function advanceToPart2() {
+            if (popupAdvanced) return;
+            popupAdvanced = true;
+            var card = document.getElementById('popupCard');
+            // Fade out to white
+            card.classList.remove('bg-frostNavy');
+            card.classList.add('bg-white');
+            card.style.opacity = '0';
+            setTimeout(function() {
+                // Swap content
+                document.getElementById('popupPart1').classList.add('hidden');
+                document.getElementById('popupPart2').classList.remove('hidden');
+                // Restore dark card for part 2
+                card.classList.remove('bg-white');
+                card.classList.add('bg-frostNavy');
+                // Fade back in
+                card.style.opacity = '0';
+                requestAnimationFrame(function() {
+                    card.style.opacity = '1';
+                });
+            }, 700);
+        }
+
+        // Auto-advance to part 2 after 7 seconds
+        setTimeout(function() {
+            if (!popupAdvanced && document.getElementById('popupOverlay').style.display !== 'none') {
+                advanceToPart2();
+            }
+        }, 7000);
 
         // Wire up the popup form
         document.getElementById('popupForm').addEventListener('submit', handlePopupSubmit);
