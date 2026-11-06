@@ -157,86 +157,108 @@ const pageHtml = `
             100% { transform: translateX(-50%); }
         }
         .animate-marquee { display: flex; width: 200%; animation: marquee 72s linear infinite; }
+
+        /* === Diagnostic Visual Animations === */
+
+        /* Spine: individual vertebrae pulse in sequence */
+        @keyframes vertebraPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.15); }
+        }
+        .vertebra {
+            animation: vertebraPulse 2.4s infinite ease-in-out;
+        }
+        .vertebra:nth-child(1) { animation-delay: 0s; }
+        .vertebra:nth-child(2) { animation-delay: 0.2s; }
+        .vertebra:nth-child(3) { animation-delay: 0.4s; }
+        .vertebra:nth-child(4) { animation-delay: 0.6s; }
+        .vertebra:nth-child(5) { animation-delay: 0.8s; }
+        .vertebra:nth-child(6) { animation-delay: 1.0s; }
+        .vertebra:nth-child(7) { animation-delay: 1.2s; }
+
+        /* Skull: concussion impact ripple */
+        @keyframes concussionRipple {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(2.2); opacity: 0; }
+        }
+        .concussion-ring {
+            animation: concussionRipple 2.8s infinite ease-out;
+        }
+        .concussion-ring:nth-child(2) { animation-delay: 0.9s; }
+        .concussion-ring:nth-child(3) { animation-delay: 1.8s; }
+
+        /* Skeleton body: scan sweep left to right */
+        @keyframes scanSweep {
+            0% { left: 0%; opacity: 0.3; }
+            50% { left: 100%; opacity: 1; }
+            100% { left: 0%; opacity: 0.3; }
+        }
+        .scan-sweep {
+            animation: scanSweep 5s infinite ease-in-out;
+        }
+
+        /* Joint highlight glow */
+        @keyframes jointGlow {
+            0%, 100% { box-shadow: 0 0 4px rgba(0,242,254,0.4); opacity: 0.5; }
+            50% { box-shadow: 0 0 12px rgba(0,242,254,0.9); opacity: 1; }
+        }
+        .joint-dot {
+            animation: jointGlow 3s infinite ease-in-out;
+        }
+        .joint-dot:nth-child(odd) { animation-delay: 1.5s; }
+
+        /* Floating diagnostic label */
+        @keyframes labelFloat {
+            0%, 100% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-3px); opacity: 1; }
+        }
+        .diag-label {
+            animation: labelFloat 4s infinite ease-in-out;
+        }
+        .diag-label:nth-child(even) { animation-delay: 2s; }
     </style>
 </head>
 <body class="bg-clinicalWhite text-frostNavy font-sans antialiased selection:bg-frostCyan selection:text-white pb-24 md:pb-0">
 
     <!-- POPUP OVERLAY (shows immediately on page load) -->
     <div id="popupOverlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4">
-        <div id="popupCard" class="bg-frostNavy border-2 border-frostCyan rounded-2xl shadow-2xl max-w-md w-full p-6 md:p-8 relative text-white transition-opacity duration-700">
-
-            <!-- PART 1: Medical Proof Summary -->
-            <div id="popupPart1">
-                <button onclick="closePopup()" class="absolute top-3 right-3 text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
-                <div class="text-center mb-5">
-                    <i class="fa-solid fa-file-shield text-5xl text-frostCyan"></i>
-                    <h3 class="text-2xl font-black uppercase mt-3 tracking-tight">The Medical Proof You Need</h3>
-                    <p class="text-xs text-frostIce mt-1 font-bold uppercase tracking-wide">For a Fair Insurance Settlement</p>
-                </div>
-                <div class="space-y-4 text-sm leading-relaxed text-slate-200">
-                    <p class="font-semibold">
-                        Insurance companies do not pay for pain they cannot see. Without objective diagnostic evidence, your claim is treated as minor and settled for pennies. To receive a fair payout, your file must contain:
-                    </p>
-                    <ul class="space-y-2.5">
-                        <li class="flex items-start gap-2.5">
-                            <i class="fa-solid fa-circle-check text-frostCyan text-base mt-0.5 shrink-0"></i>
-                            <span><strong class="text-white">Objective MRI imaging</strong> documenting spinal disc injury, nerve compression, or soft-tissue damage directly linked to the collision.</span>
-                        </li>
-                        <li class="flex items-start gap-2.5">
-                            <i class="fa-solid fa-circle-check text-frostCyan text-base mt-0.5 shrink-0"></i>
-                            <span><strong class="text-white">Detailed diagnostic reports</strong> from a qualified medical specialist — not generic ER discharge notes that say "you're fine."</span>
-                        </li>
-                        <li class="flex items-start gap-2.5">
-                            <i class="fa-solid fa-circle-check text-frostCyan text-base mt-0.5 shrink-0"></i>
-                            <span><strong class="text-white">A documented treatment protocol</strong> showing ongoing medical necessity, forcing the adjuster to justify any lowball offer in writing.</span>
-                        </li>
-                    </ul>
-                    <p class="font-semibold border-l-2 border-frostCyan pl-3 italic">
-                        Without this proof, your attorney has no leverage. With it, the insurance company must pay — or face it in court.
-                    </p>
-                </div>
-                <div class="flex justify-end mt-6">
-                    <button onclick="advanceToPart2()" class="medical-btn px-6 py-3 rounded-lg text-base uppercase tracking-wider flex items-center gap-2 animate-frost-pulse">
-                        <span>Continue</span>
-                        <i class="fa-solid fa-arrow-right text-lg"></i>
-                    </button>
-                </div>
+        <div id="popupCard" class="bg-frostNavy border-2 border-frostCyan rounded-2xl shadow-2xl max-w-md w-full p-6 md:p-8 relative text-white">
+            <button onclick="closePopup()" class="absolute top-3 right-3 text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
+            <div class="text-center mb-5">
+                <i class="fa-solid fa-file-waveform text-5xl text-frostCyan"></i>
+                <h3 class="text-2xl font-black mt-3 tracking-tight leading-tight">Receive a fair legal settlement.</h3>
+                <h3 class="text-2xl font-black mt-1 tracking-tight leading-tight text-frostIce">Do it the right way.</h3>
+                <p class="text-xs text-slate-400 mt-3 leading-relaxed">Get objective medical proof that forces the insurance company to take your claim seriously. Our medical team will contact you within minutes.</p>
             </div>
-
-            <!-- PART 2: The Form (hidden initially) -->
-            <div id="popupPart2" class="hidden">
-                <button onclick="closePopup()" class="absolute top-3 right-3 text-slate-400 hover:text-white text-2xl leading-none">&times;</button>
-                <div class="text-center mb-5">
-                    <i class="fa-solid fa-file-waveform text-5xl text-frostCyan"></i>
-                    <h3 class="text-2xl font-black uppercase mt-3 tracking-tight">Get Your Big Medical Settlement</h3>
-                    <p class="text-xs text-frostIce mt-1">Fill this out now to get maximum medical proof for your claim.</p>
+            <form id="popupForm" class="space-y-3" autocomplete="on">
+                <div>
+                    <label for="popupName" class="block text-xs font-bold text-slate-300 uppercase mb-1 tracking-wide">Full Name</label>
+                    <input type="text" id="popupName" name="name" placeholder="John Doe" required autocomplete="name" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce transition-colors">
                 </div>
-                <form id="popupForm" class="space-y-3" autocomplete="on">
-                    <div>
-                        <label for="popupName" class="block text-xs font-bold text-slate-300 uppercase mb-1">Full Name</label>
-                        <input type="text" id="popupName" name="name" placeholder="John Doe" required autocomplete="name" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
-                    </div>
-                    <div>
-                        <label for="popupPhone" class="block text-xs font-bold text-slate-300 uppercase mb-1">Cellphone</label>
-                        <input type="tel" id="popupPhone" name="tel" placeholder="(555) 000-0000" required autocomplete="tel" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
-                    </div>
-                    <div>
-                        <label for="popupEmail" class="block text-xs font-bold text-slate-300 uppercase mb-1">Email</label>
-                        <input type="email" id="popupEmail" name="email" placeholder="you@example.com" required autocomplete="email" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce">
-                    </div>
-                    <button type="submit" class="w-full medical-btn py-3.5 rounded-lg text-lg uppercase tracking-wider shadow-xl flex justify-center items-center gap-2 animate-frost-pulse">
-                        <i class="fa-solid fa-bolt text-xl"></i>
-                        <span>Submit & Get Paid</span>
-                    </button>
-                </form>
-                <div id="popupSuccess" class="hidden text-center py-8 space-y-3">
-                    <i class="fa-solid fa-circle-check text-5xl text-frostIce"></i>
-                    <h4 class="text-xl font-black text-white uppercase">Request Received!</h4>
-                    <p class="text-xs text-slate-300">Our medical team will contact you shortly to start your evaluation.</p>
-                    <button onclick="closePopup()" class="medical-btn px-6 py-2 rounded-lg text-base uppercase mt-2">Close</button>
+                <div>
+                    <label for="popupPhone" class="block text-xs font-bold text-slate-300 uppercase mb-1 tracking-wide">Cellphone</label>
+                    <input type="tel" id="popupPhone" name="tel" placeholder="(555) 000-0000" required autocomplete="tel" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce transition-colors">
                 </div>
+                <div>
+                    <label for="popupEmail" class="block text-xs font-bold text-slate-300 uppercase mb-1 tracking-wide">Email</label>
+                    <input type="email" id="popupEmail" name="email" placeholder="you@example.com" required autocomplete="email" class="w-full bg-slate-900 border border-frostCyan/50 rounded-lg p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-frostIce transition-colors">
+                </div>
+                <button type="submit" class="w-full medical-btn py-3.5 rounded-lg text-lg uppercase tracking-wider shadow-xl flex justify-center items-center gap-2 animate-frost-pulse">
+                    <i class="fa-solid fa-arrow-right text-xl"></i>
+                    <span>Request My Evaluation</span>
+                </button>
+            </form>
+            <div class="flex items-center justify-center gap-4 mt-4 pt-3 border-t border-slate-700/50 text-[10px] text-slate-400 uppercase tracking-wider font-bold">
+                <span class="flex items-center gap-1"><i class="fa-solid fa-lock text-frostCyan"></i> Confidential</span>
+                <span class="flex items-center gap-1"><i class="fa-solid fa-clock text-frostCyan"></i> 5-Min Response</span>
+                <span class="flex items-center gap-1"><i class="fa-solid fa-shield-halved text-frostCyan"></i> No Obligation</span>
             </div>
-
+            <div id="popupSuccess" class="hidden text-center py-8 space-y-3">
+                <i class="fa-solid fa-circle-check text-5xl text-frostIce"></i>
+                <h4 class="text-xl font-black text-white uppercase">Request Received</h4>
+                <p class="text-xs text-slate-300">Our medical team will contact you shortly to start your evaluation.</p>
+                <button onclick="closePopup()" class="medical-btn px-6 py-2 rounded-lg text-base uppercase mt-2">Close</button>
+            </div>
         </div>
     </div>
 
@@ -303,14 +325,50 @@ const pageHtml = `
                 <div class="relative max-w-sm mx-auto md:hidden my-6 rounded-2xl overflow-hidden bg-frostNavy xray-glow p-4 text-white">
                     <div class="laser-line"></div>
                     <div class="flex justify-between items-center mb-2">
-                        <span class="text-frostIce font-bold text-xs uppercase"><i class="fa-solid fa-dna"></i> MRI Spine Scan Diagnostics</span>
-                        <span class="bg-frostCyan text-white text-xs font-black px-2 py-0.5 rounded uppercase">Verified Proof</span>
+                        <span class="text-frostIce font-bold text-xs uppercase"><i class="fa-solid fa-dna"></i> Injury Diagnostics</span>
+                        <span class="bg-frostCyan text-white text-xs font-black px-2 py-0.5 rounded uppercase">Scanning</span>
                     </div>
-                    <div class="relative h-44 bg-black rounded-lg flex items-center justify-center border border-frostCyan/40 overflow-hidden">
-                        <i class="fa-solid fa-bone text-8xl text-slate-700/50 absolute"></i>
-                        <div class="text-center z-10 bg-slate-900/80 p-3 rounded border border-frostIce/40">
-                            <span class="text-3xl font-black text-frostIce">$ BIG BUCKS</span>
-                            <p class="text-[10px] font-bold text-slate-300 uppercase tracking-wider mt-1">Proof Discovers Hidden Cash Value</p>
+                    <div class="relative h-56 bg-black rounded-lg flex flex-col items-center justify-center border border-frostCyan/40 overflow-hidden">
+                        <!-- Spine with pulsing vertebrae -->
+                        <div class="relative flex flex-col items-center gap-0.5 z-10">
+                            <span class="text-[8px] text-frostIce uppercase tracking-wider diag-label mb-1">Spinal Disc Analysis</span>
+                            <div class="flex flex-col items-center gap-1">
+                                <div class="vertebra w-3 h-2 rounded-sm bg-frostCyan"></div>
+                                <div class="vertebra w-4 h-2.5 rounded-sm bg-frostCyan"></div>
+                                <div class="vertebra w-5 h-3 rounded-sm bg-frostIce"></div>
+                                <div class="vertebra w-6 h-3 rounded-sm bg-frostIce"></div>
+                                <div class="vertebra w-5 h-3 rounded-sm bg-frostCyan"></div>
+                                <div class="vertebra w-4 h-2.5 rounded-sm bg-frostCyan"></div>
+                                <div class="vertebra w-3 h-2 rounded-sm bg-frostCyan"></div>
+                            </div>
+                        </div>
+
+                        <!-- Skull with concussion ripples -->
+                        <div class="relative mt-4 z-10">
+                            <span class="text-[8px] text-frostIce uppercase tracking-wider diag-label block text-center mb-1">Concussion Impact</span>
+                            <div class="relative w-16 h-16 flex items-center justify-center">
+                                <i class="fa-solid fa-skull text-4xl text-slate-600 absolute z-10"></i>
+                                <div class="concussion-ring absolute w-8 h-8 rounded-full border-2 border-frostIce"></div>
+                                <div class="concussion-ring absolute w-8 h-8 rounded-full border-2 border-frostCyan"></div>
+                                <div class="concussion-ring absolute w-8 h-8 rounded-full border-2 border-frostIce"></div>
+                            </div>
+                        </div>
+
+                        <!-- Joint dots with scan sweep -->
+                        <div class="relative mt-3 z-10 w-full max-w-[200px]">
+                            <span class="text-[8px] text-frostIce uppercase tracking-wider diag-label block text-center mb-1">Skeletal Scan</span>
+                            <div class="relative flex justify-between items-center px-2">
+                                <div class="joint-dot w-2 h-2 rounded-full bg-frostIce"></div>
+                                <div class="joint-dot w-2 h-2 rounded-full bg-frostCyan"></div>
+                                <div class="joint-dot w-2 h-2 rounded-full bg-frostIce"></div>
+                                <div class="joint-dot w-2 h-2 rounded-full bg-frostCyan"></div>
+                                <div class="joint-dot w-2 h-2 rounded-full bg-frostIce"></div>
+                                <div class="joint-dot w-2 h-2 rounded-full bg-frostCyan"></div>
+                            </div>
+                            <div class="relative h-8 mt-1 rounded border border-frostCyan/20 overflow-hidden">
+                                <i class="fa-solid fa-person text-3xl text-slate-700/40 absolute left-1/2 -translate-x-1/2 top-0"></i>
+                                <div class="scan-sweep absolute top-0 bottom-0 w-0.5 bg-frostIce shadow-[0_0_8px_#00F2FE]"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -705,7 +763,7 @@ const pageHtml = `
                         name: name,
                         phone: phone,
                         email: email,
-                        injuryStatus: 'I want a big medical settlement',
+                        injuryStatus: 'Popup evaluation request',
                         source: 'Popup Form'
                     }),
                 });
@@ -722,38 +780,6 @@ const pageHtml = `
         function closePopup() {
             document.getElementById('popupOverlay').style.display = 'none';
         }
-
-        var popupAdvanced = false;
-
-        function advanceToPart2() {
-            if (popupAdvanced) return;
-            popupAdvanced = true;
-            var card = document.getElementById('popupCard');
-            // Fade out to white
-            card.classList.remove('bg-frostNavy');
-            card.classList.add('bg-white');
-            card.style.opacity = '0';
-            setTimeout(function() {
-                // Swap content
-                document.getElementById('popupPart1').classList.add('hidden');
-                document.getElementById('popupPart2').classList.remove('hidden');
-                // Restore dark card for part 2
-                card.classList.remove('bg-white');
-                card.classList.add('bg-frostNavy');
-                // Fade back in
-                card.style.opacity = '0';
-                requestAnimationFrame(function() {
-                    card.style.opacity = '1';
-                });
-            }, 700);
-        }
-
-        // Auto-advance to part 2 after 7 seconds
-        setTimeout(function() {
-            if (!popupAdvanced && document.getElementById('popupOverlay').style.display !== 'none') {
-                advanceToPart2();
-            }
-        }, 7000);
 
         // Wire up the popup form
         document.getElementById('popupForm').addEventListener('submit', handlePopupSubmit);
